@@ -1,0 +1,17 @@
+{
+  "name": "minecraft-map",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.8",
+    "sharp": "^0.33.5"
+  }
+}
