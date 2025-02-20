@@ -56,15 +56,17 @@ async function mapify(imgBuffer){
  return Buffer.from(newImg)
 }
 
-export async function GET({ params }){
- const { long, lat } = params;
+export async function GET(res){
+ const params = res.url.searchParams;
+ let long = params.get("long")
+ let lat = params.get("lat")
 
  const apiKey = "AIzaSyBc2fb__ShgSJtk3HUhcpiK9qvFu9Ix0qs"
- const lat = 0;
- const long = 0;
- let buffer = await getSatellite(apiKey);
- let map = await mapify(png);
- let b64data = buffer.toString('base64')
+ let buffer = await getSatellite(apiKey, long, lat);
+ let map = await mapify(buffer);
+ console.log(map.length)
+
+ let b64data = map.toString('base64')
 
  let src = `data:image/jpeg;base64,${b64data.toString("base64")}`;
 

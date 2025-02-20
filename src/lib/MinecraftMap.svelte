@@ -4,7 +4,6 @@
     let img;
     onMount(async () => {
         const data = await fetch("/api/getImage?long=39.430567&lat=-74.645647").then(res => res.json())
-        console.log(data)
         const { src } = data
 
         img = `<img style='display:block; width:100px;height:100px;' id='base64image'
