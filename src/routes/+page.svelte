@@ -1,5 +1,5 @@
 <script>
-    import MinecraftMap from "$lib/MinecraftMap/MinecraftMap.svelte";
+    import MinecraftMap from "$lib/MinecraftMap.svelte";
 </script>
 
 <MinecraftMap />
