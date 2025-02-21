@@ -39,12 +39,12 @@ async function mapify(imgBuffer){
      kernel: sharp.kernel.nearest
  })
  .raw()
- .toColorspace('srgb')
  .toBuffer({ resolveWithObject: true })
 
  const colorMap = new Map();
  let newImg = [];
  for(let i = 0; i < img.info.width * img.info.height; i++){
+    // console.log(i + " / " + img.info.width * img.info.height)
      let pixelColor = img.data.subarray(i*3, (i+1)*3)
      let c = colorMap.get(pixelColor)
      if(!c){
@@ -53,7 +53,7 @@ async function mapify(imgBuffer){
      }
      newImg = [...newImg, ...c]
  }
- return Buffer.from(newImg)
+ return await sharp(Buffer.from(newImg), { raw: { width: 128, height: 128, channels: 3 } }).jpeg().toBuffer()
 }
 
 export async function GET(res){
@@ -64,8 +64,6 @@ export async function GET(res){
  const apiKey = "AIzaSyBc2fb__ShgSJtk3HUhcpiK9qvFu9Ix0qs"
  let buffer = await getSatellite(apiKey, long, lat);
  let map = await mapify(buffer);
- console.log(map.length)
-
  let b64data = map.toString('base64')
 
  let src = `data:image/jpeg;base64,${b64data.toString("base64")}`;
